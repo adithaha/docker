@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v2alpha1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: glassfish4-sample-metrics-memory
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: DeploymentConfig
+    name: glassfish4-sample
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 50
